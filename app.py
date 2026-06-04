@@ -975,7 +975,10 @@ with tabs[4]:
         with st.spinner("Loading via FastF1…"):
             ff1l=load_ff1(2026,sel_lr_rnd,sel_st)
 
-        if ff1l and ff1l.laps is not None and len(ff1l.laps)>0:
+        if ff1l:
+    try:
+        laps_check = ff1l.laps
+        if laps_check is not None and len(laps_check)>0:
             ldf=ff1l.laps.copy().dropna(subset=["LapTime"])
             ldf["LapTimeSec"]=ldf["LapTime"].dt.total_seconds()
             ldf=ldf[ldf["LapTimeSec"]>0]
